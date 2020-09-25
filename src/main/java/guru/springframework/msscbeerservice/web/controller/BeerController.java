@@ -19,7 +19,7 @@ import guru.springframework.msscbeerservice.web.model.BeerDto;
 public class BeerController {
 	
 	@GetMapping({"/{beerId}"})
-	public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerid") UUID beerId) {
+	public ResponseEntity<BeerDto> getBeerById(@PathVariable("beerId") UUID beerId) {
 		// todo impl
 		return new ResponseEntity<BeerDto>(BeerDto.builder().build(), HttpStatus.OK);
 	}
