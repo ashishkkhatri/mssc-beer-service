@@ -6,6 +6,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -19,9 +20,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import guru.springframework.msscbeerservice.web.model.BeerDto;
+import guru.springframework.msscbeerservice.web.model.BeerStyleEnum;
 
 @WebMvcTest(BeerController.class)
-class BeerControllerTest {
+public class BeerControllerTest {
 	
 	@Autowired
 	MockMvc mockMvc;
@@ -30,14 +32,14 @@ class BeerControllerTest {
 	ObjectMapper objectMapper;
 
 	@Test
-	void testGetBeerById() throws Exception {
+	public void testGetBeerById() throws Exception {
 		mockMvc.perform(get("/api/v1/beer/" + UUID.randomUUID().toString()).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk());
 	}
 
 	@Test
-	void testSaveNewBeer() throws Exception {
-		BeerDto beerDto = new BeerDto().builder().build();
+	public void testSaveNewBeer() throws Exception {
+		BeerDto beerDto = getValidBeerDto();
 		String BeerDtoJson = objectMapper.writeValueAsString(beerDto);
 		
 		mockMvc.perform(post("/api/v1/beer/")
@@ -47,14 +49,23 @@ class BeerControllerTest {
 	}
 
 	@Test
-	void testUpdateBeerById() throws Exception {
-		BeerDto beerDto = new BeerDto().builder().build();
+	public void testUpdateBeerById() throws Exception {
+		BeerDto beerDto = getValidBeerDto();
 		String BeerDtoJson = objectMapper.writeValueAsString(beerDto);
 		
 		mockMvc.perform(put("/api/v1/beer/" + UUID.randomUUID().toString())
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(BeerDtoJson))
 				.andExpect(status().isNoContent());
+	}
+	
+	BeerDto getValidBeerDto() {
+		return BeerDto.builder()
+						.beername("My Beer")
+						.beerStyle(BeerStyleEnum.ALE)
+						.price(new BigDecimal("2.89"))
+						.upc(245245324L)
+						.build();
 	}
 
 }
