@@ -10,6 +10,9 @@ import guru.springframework.msscbeerservice.repositories.BeerRepository;
 
 @Component
 public class BeerLoader implements CommandLineRunner{
+	public static final String BEER_1_UPC="0766564332";
+	public static final String BEER_2_UPC="0766564336";
+	public static final String BEER_3_UPC="0766564334";
 
 	private final BeerRepository beerRepository;
 	
@@ -29,7 +32,7 @@ public class BeerLoader implements CommandLineRunner{
 							.beerName("Mango bobs")
 							.beerStyle("IPA")
 							.quantityToBrew(200)
-							.upc(32442344243L)
+							.upc(BEER_1_UPC)
 							.price(new BigDecimal("12.34"))
 							.minOnHand(12)
 							.build());
@@ -38,7 +41,16 @@ public class BeerLoader implements CommandLineRunner{
 					.beerName("Galaxy cat")
 					.beerStyle("PALE_ALE")
 					.quantityToBrew(200)
-					.upc(32442344283L)
+					.upc(BEER_2_UPC)
+					.price(new BigDecimal("11.34"))
+					.minOnHand(12)
+					.build());
+			
+			beerRepository.save(Beer.builder()
+					.beerName("No Hammer On The Bar")
+					.beerStyle("PALE_ALE")
+					.quantityToBrew(200)
+					.upc(BEER_3_UPC)
 					.price(new BigDecimal("11.34"))
 					.minOnHand(12)
 					.build());

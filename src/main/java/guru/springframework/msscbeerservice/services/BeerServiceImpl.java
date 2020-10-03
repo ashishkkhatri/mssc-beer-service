@@ -13,12 +13,18 @@ import guru.springframework.msscbeerservice.web.mappers.BeerMapper;
 import guru.springframework.msscbeerservice.web.model.BeerDto;
 import lombok.RequiredArgsConstructor;
 
+//@RequiredArgsConstructor
 @Service
-@RequiredArgsConstructor
 public class BeerServiceImpl implements BeerService{
 	
 	private final BeerRepository beerRepository;
 	private final BeerMapper beerMapper;
+
+	public BeerServiceImpl(BeerRepository beerRepository, BeerMapper beerMapper) {
+		super();
+		this.beerRepository = beerRepository;
+		this.beerMapper = beerMapper;
+	}
 
 	@Override
 	public BeerDto getById(UUID beerId) {

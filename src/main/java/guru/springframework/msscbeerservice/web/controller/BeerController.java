@@ -17,8 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import guru.springframework.msscbeerservice.services.BeerService;
 import guru.springframework.msscbeerservice.web.model.BeerDto;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping("/api/v1/beer")
 @RestController
 public class BeerController {
@@ -32,7 +33,7 @@ public class BeerController {
 	
 	@PostMapping
 	public ResponseEntity saveNewBeer(@Valid @RequestBody BeerDto beerDto) {
-		return new ResponseEntity(beerService.saveNewBeer(beerDto), HttpStatus.CREATED);
+		return new ResponseEntity<>(beerService.saveNewBeer(beerDto), HttpStatus.CREATED);
 	}
 	
 	@PutMapping({"/{beerId}"})
