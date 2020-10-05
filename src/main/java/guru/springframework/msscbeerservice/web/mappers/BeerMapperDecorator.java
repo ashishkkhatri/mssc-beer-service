@@ -4,16 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import guru.springframework.msscbeerservice.domain.Beer;
+import guru.springframework.msscbeerservice.services.inventory.BeerInventoryService;
 import guru.springframework.msscbeerservice.web.model.BeerDto;
 
 public abstract class BeerMapperDecorator implements BeerMapper {
-//	private BeerInventoryService beerInventoryService;
+	private BeerInventoryService beerInventoryService;
     private BeerMapper mapper;
 
-//    @Autowired
-//    public void setBeerInventoryService(BeerInventoryService beerInventoryService) {
-//        this.beerInventoryService = beerInventoryService;
-//    }
+    @Autowired
+    public void setBeerInventoryService(BeerInventoryService beerInventoryService) {
+        this.beerInventoryService = beerInventoryService;
+    }
 
     @Autowired
     public void setMapper(BeerMapper mapper) {
@@ -25,12 +26,12 @@ public abstract class BeerMapperDecorator implements BeerMapper {
        return mapper.beerToBeerDto(beer);
     }
 
-//    @Override
-//    public BeerDto beerToBeerDtoWithInventory(Beer beer) {
-//        BeerDto dto = mapper.beerToBeerDto(beer);
-//        dto.setQuantityOnHand(beerInventoryService.getOnhandInventory(beer.getId()));
-//        return dto;
-//    }
+    @Override
+    public BeerDto beerToBeerDtoWithInventory(Beer beer) {
+        BeerDto dto = mapper.beerToBeerDto(beer);
+        dto.setQuantityOnHand(beerInventoryService.getOnhandInventory(beer.getId()));
+        return dto;
+    }
 
     @Override
     public Beer beerDtoToBeer(BeerDto beerDto) {
