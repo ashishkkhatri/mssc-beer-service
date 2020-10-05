@@ -1,6 +1,7 @@
 package guru.springframework.msscbeerservice.web.controller;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyBoolean;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -39,7 +40,7 @@ public class BeerControllerTest {
 
 	@Test
 	public void testGetBeerById() throws Exception {
-		given(beerService.getById(any())).willReturn(getValidBeerDto());
+		given(beerService.getById(any(), anyBoolean())).willReturn(getValidBeerDto());
 		mockMvc.perform(get("/api/v1/beer/" + UUID.randomUUID().toString()).accept(MediaType.APPLICATION_JSON))
 				.andExpect(status().isOk());
 	}

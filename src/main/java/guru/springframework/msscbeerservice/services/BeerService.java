@@ -12,12 +12,12 @@ import guru.springframework.msscbeerservice.web.model.BeerStyleEnum;
 
 public interface BeerService {
 
-	BeerDto getById(UUID beerId);
+	BeerDto getById(UUID beerId, Boolean showInventoryOnHand);
 
 	BeerDto saveNewBeer(@Valid BeerDto beerDto);
 
 	BeerDto updateBeer(UUID beerId, @Valid BeerDto beerDto);
 
-	BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest of);
+	BeerPagedList listBeers(String beerName, BeerStyleEnum beerStyle, PageRequest pageReuest, Boolean showInventoryOnHand);
 
 }
