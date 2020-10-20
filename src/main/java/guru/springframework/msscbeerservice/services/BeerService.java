@@ -13,6 +13,8 @@ import guru.springframework.msscbeerservice.web.model.BeerStyleEnum;
 public interface BeerService {
 
 	BeerDto getById(UUID beerId, Boolean showInventoryOnHand);
+	
+	BeerDto getByUpc(String upc);
 
 	BeerDto saveNewBeer(@Valid BeerDto beerDto);
 

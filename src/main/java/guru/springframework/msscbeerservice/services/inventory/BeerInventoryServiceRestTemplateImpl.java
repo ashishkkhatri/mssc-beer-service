@@ -46,6 +46,7 @@ public class BeerInventoryServiceRestTemplateImpl implements BeerInventoryServic
 				.stream()
 				.mapToInt(BeerInventoryDto::getQuantityOnHand)
 				.sum();
+		log.debug(onHand.toString());
 		return onHand;
 	}
 }
